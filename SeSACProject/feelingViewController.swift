@@ -65,13 +65,51 @@ class feelingViewController: UIViewController {
         setButtonTitle(cryButton, name: "cry")
     }
  
-    
+    // 버튼 타이틀 설정
     func setButtonTitle(_ button: UIButton, name: String) {
         button.setTitle(name, for: .normal)
     }
     
+    
+    // 클릭한 버튼 타이틀 체크 후, 클릭횟수 증가 및 레이블 출력 메소드
     @IBAction func clickedButton(_ sender: UIButton) {
         
+        // 클릭한 버튼 타이틀 옵셔널 바인딩 및 확인
+        guard let buttonName = sender.currentTitle else { return }
+        print("현재 클릭된 버튼 이름: \(buttonName)")
+        
+        // 클릭한 버튼의 넘버수 증가 및 레이블 출력
+        switch buttonName {
+        case "happy":
+            happyNumber += 1
+            happyLabel.text = "행복해 \(happyNumber)"
+        case "love":
+            loveNumber += 1
+            loveLabel.text = "사랑해 \(loveNumber)"
+        case "like":
+            likeNumber += 1
+            likeLabel.text = "좋아해 \(likeNumber)"
+        case "panic":
+            panicNumber += 1
+            panicLabel.text = "당황해 \(panicNumber)"
+        case "sad":
+            sadNumber += 1
+            sadLabel.text = "속상해 \(sadNumber)"
+        case "feelingDown":
+            feelingDownNumber += 1
+            fellingDownLabel.text = "우울해 \(feelingDownNumber)"
+        case "bore":
+            boreNumber += 1
+            boreLabel.text = "심심해 \(boreNumber)"
+        case "sick":
+            sickNumber += 1
+            sickLabel.text = "아파해 \(sickNumber)"
+        case "cry":
+            cryNumber += 1
+            cryLabel.text = "눈물나 \(cryNumber)"
+        default :
+            print("영혼없음")
+        }
     }
     
 }
