@@ -54,20 +54,23 @@ class feelingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setButtonTitle(happyButton, name: "happy")
-        setButtonTitle(loveButton, name: "love")
-        setButtonTitle(likeButton, name: "like")
-        setButtonTitle(panicButton, name: "panic")
-        setButtonTitle(sadButton, name: "sad")
-        setButtonTitle(feelingDownButton, name: "feelingDown")
-        setButtonTitle(boreButton, name: "bore")
-        setButtonTitle(sickButton, name: "sick")
-        setButtonTitle(cryButton, name: "cry")
+        setButtonTitleLabelText(happyButton, name: "happy", label: happyLabel, text: "행복해")
+        setButtonTitleLabelText(loveButton, name: "love", label: loveLabel, text: "사랑해")
+        setButtonTitleLabelText(likeButton, name: "like", label: likeLabel, text: "좋아해")
+        setButtonTitleLabelText(panicButton, name: "panic", label: panicLabel, text: "당황해")
+        setButtonTitleLabelText(sadButton, name: "sad", label: sadLabel, text: "속상해")
+        setButtonTitleLabelText(feelingDownButton, name: "feelingDown", label: fellingDownLabel, text: "우울해")
+        setButtonTitleLabelText(boreButton, name: "bore", label: boreLabel, text: "심심해")
+        setButtonTitleLabelText(sickButton, name: "sick", label: sickLabel, text: "아파해")
+        setButtonTitleLabelText(cryButton, name: "cry", label: cryLabel, text: "눈물나")
+        
     }
  
     // 버튼 타이틀 설정
-    func setButtonTitle(_ button: UIButton, name: String) {
+    func setButtonTitleLabelText(_ button: UIButton, name: String, label: UILabel, text: String) {
         button.setTitle(name, for: .normal)
+        label.text = text
+        
     }
     
     
