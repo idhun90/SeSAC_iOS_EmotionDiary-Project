@@ -70,6 +70,7 @@ class feelingViewController: UIViewController {
     func setButtonTitleLabelText(_ button: UIButton, name: String, label: UILabel, text: String) {
         button.setTitle(name, for: .normal)
         label.text = text
+        button.tintColor = .clear
         
     }
     
@@ -114,5 +115,4 @@ class feelingViewController: UIViewController {
             print("영혼없음")
         }
     }
-    
 }
