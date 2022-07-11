@@ -74,7 +74,7 @@ class feelingViewController: UIViewController {
     }
     
     
-    // 클릭한 버튼 타이틀 체크 후, 클릭횟수 증가 및 레이블 출력 메소드
+    // 클릭한 버튼 타이틀 체크 후, 클릭 횟수 증가 및 레이블 출력 메소드
     @IBAction func clickedButton(_ sender: UIButton) {
         
         // 클릭한 버튼 타이틀 옵셔널 바인딩 및 확인
