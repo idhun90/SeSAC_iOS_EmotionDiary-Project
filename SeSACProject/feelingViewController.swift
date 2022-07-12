@@ -38,81 +38,139 @@ class feelingViewController: UIViewController {
     @IBOutlet weak var cryButton: UIButton!
     @IBOutlet weak var cryLabel: UILabel!
     
+    @IBOutlet var labelCollection: [UILabel]!
     
-    // 버튼 클릭 수
-    var happyNumber = 0 // 행복해
-    var loveNumber = 0 // 사랑해
-    var likeNumber = 0 // 좋아해
-    var panicNumber = 0 // 당황해
-    var sadNumber = 0 // 속상해
-    var feelingDownNumber = 0 //우울해
-    var boreNumber = 0 // 심심해
-    var sickNumber = 0 // 아파해
-    var cryNumber = 0 // 눈물나
+    // 수업용
+//    @IBOutlet weak var nickName: UILabel!
     
-
+   
+    
+    // tag용 배열 생성
+    var emotionCount = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    
+    // label.text 열거형 생성
+    enum LabelName: String {
+        case happy = "행복해"
+        case love = "사랑해"
+        case like = "좋아해"
+        case panic = "당황해"
+        case sad = "속상해"
+        case feelingDown = "우울해"
+        case bore = "심심해"
+        case sick = "아파해"
+        case cry = "눈물나"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+     
+        setUpLabelText()
         
-        setButtonTitleLabelText(happyButton, name: "happy", label: happyLabel, text: "행복해")
-        setButtonTitleLabelText(loveButton, name: "love", label: loveLabel, text: "사랑해")
-        setButtonTitleLabelText(likeButton, name: "like", label: likeLabel, text: "좋아해")
-        setButtonTitleLabelText(panicButton, name: "panic", label: panicLabel, text: "당황해")
-        setButtonTitleLabelText(sadButton, name: "sad", label: sadLabel, text: "속상해")
-        setButtonTitleLabelText(feelingDownButton, name: "feelingDown", label: fellingDownLabel, text: "우울해")
-        setButtonTitleLabelText(boreButton, name: "bore", label: boreLabel, text: "심심해")
-        setButtonTitleLabelText(sickButton, name: "sick", label: sickLabel, text: "아파해")
-        setButtonTitleLabelText(cryButton, name: "cry", label: cryLabel, text: "눈물나")
+        // 수업 강의 내용
+//        nickName.text = setUserNickname() // 이렇게 사용하기 위해 반환을 사용한다.
+//        view.backgroundColor = example().0
+//        cryButton.setImage(UIImage(named: example().2), for: .normal)
         
     }
  
-    // 버튼 타이틀 설정
-    func setButtonTitleLabelText(_ button: UIButton, name: String, label: UILabel, text: String) {
-        button.setTitle(name, for: .normal)
-        label.text = text
-        button.tintColor = .clear
-        
-    }
-    
+   
     
     // 클릭한 버튼 타이틀 체크 후, 클릭 횟수 증가 및 레이블 출력 메소드
     @IBAction func clickedButton(_ sender: UIButton) {
         
-        // 클릭한 버튼 타이틀 옵셔널 바인딩 및 확인
-        guard let buttonName = sender.currentTitle else { return }
-        print("현재 클릭된 버튼 이름: \(buttonName)")
+        //MARK: - 기존 방법
         
-        // 클릭한 버튼의 넘버수 증가 및 레이블 출력
-        switch buttonName {
-        case "happy":
-            happyNumber += 1
-            happyLabel.text = "행복해 \(happyNumber)"
-        case "love":
-            loveNumber += 1
-            loveLabel.text = "사랑해 \(loveNumber)"
-        case "like":
-            likeNumber += 1
-            likeLabel.text = "좋아해 \(likeNumber)"
-        case "panic":
-            panicNumber += 1
-            panicLabel.text = "당황해 \(panicNumber)"
-        case "sad":
-            sadNumber += 1
-            sadLabel.text = "속상해 \(sadNumber)"
-        case "feelingDown":
-            feelingDownNumber += 1
-            fellingDownLabel.text = "우울해 \(feelingDownNumber)"
-        case "bore":
-            boreNumber += 1
-            boreLabel.text = "심심해 \(boreNumber)"
-        case "sick":
-            sickNumber += 1
-            sickLabel.text = "아파해 \(sickNumber)"
-        case "cry":
-            cryNumber += 1
-            cryLabel.text = "눈물나 \(cryNumber)"
-        default :
-            print("영혼없음")
+        //MARK: - tag 사용
+        emotionCount[sender.tag] += 1
+        
+        happyLabel.text = "행복해 \(emotionCount[0] == 0 ? " " : "\(emotionCount[0])")"
+        loveLabel.text = "사랑해 \(emotionCount[1] == 0 ? " " : "\(emotionCount[1])")"
+        likeLabel.text = "좋아해 \(emotionCount[2] == 0 ? " " : "\(emotionCount[2])")"
+        panicLabel.text = "당황해 \(emotionCount[3] == 0 ? " " : "\(emotionCount[3])")"
+        sadLabel.text = "속상해 \(emotionCount[4] == 0 ? " " : "\(emotionCount[4])")"
+        fellingDownLabel.text = "우울해 \(emotionCount[5] == 0 ? " " : "\(emotionCount[5])")"
+        boreLabel.text = "심심해 \(emotionCount[6] == 0 ? " " : "\(emotionCount[6])")"
+        sickLabel.text = "아파해 \(emotionCount[7] == 0 ? " " : "\(emotionCount[7])")"
+        cryLabel.text = "눈물나 \(emotionCount[8] == 0 ? " " : "\(emotionCount[8])")"
+        
+    }
+    
+    func setUpLabelText(){
+        
+        let name: [LabelName] = [.happy, .love, .like, .panic, .sad, .feelingDown, .bore, .sick, .cry]
+        
+        for i in 0...name.count-1 {
+            labelCollection[i].text = name[i].rawValue
+            
         }
     }
+    
+    // 수업용
+    // showAlertController()
+
+    
+    // 수업용
+//    func showAlertController() {
+//
+//        // 1. 흰 바탕: UIAlertController
+//        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet) // 옵셔널이라 써도되고 안 써도 된다는 의미
+//        // 액션시트일 떄 타이틀은 보통 쓰지 않기 때문에 title, message은 nil처리로 한다.
+//        // 2. 버튼
+//        let ok = UIAlertAction(title: "확인", style: .destructive, handler: nil) // handler:아울렛 메서드의 기능들이라고 이해하면 된다.
+//        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+//        let web = UIAlertAction(title: "새창으로열기", style: .default, handler: nil)
+//        let share = UIAlertAction(title: "공유", style: .default, handler: nil)
+//
+//        // 3. 1+2
+//        alert.addAction(web)
+//        alert.addAction(share)
+//        alert.addAction(ok)
+//        alert.addAction(cancel)
+//
+//        // 4. 사용자에게 띄워주기
+//        present(alert, animated: true, completion: nil) // completion: 떴을 때 뭐 해줄까요?
+//
+//        // 취소버튼은 항상 맨 아래 또는 왼쪽에 위치한다.
+//    }
+//
+//    func setUserNickname() -> String {
+//        let nicname = ["고래밥", "칙촉", "격투가"]
+//        let select = nicname.randomElement()!
+//
+//        return "저는 \(select)입니다."
+//    }
+//
+//    // 배경색, 레이블, 이미지 하나 전달
+//    func example() -> (UIColor, String, String) {
+//
+//        let color: [UIColor] = [.yellow, .red, .blue]
+//        let image: [String] = ["sesac_slime6", "sesac_slime7", "sesac_slime2", "sesac_slime5"]
+//
+//        return (color.randomElement()!, "고래밥", image.randomElement()!)
+//
+//    }
 }
+
+// 태그 코드로 사용 방법
+/*
+button.tag = 0
+
+// 배열 인덱스 생성
+var memotionArray = [0,0,0,0,0,0]
+
+@IBaction func ~~~
+ 
+ emotionArray[sender.tag] += 1
+ 
+ if sender.tag == 0 {
+    emotionArray[0]
+ 
+ if sen
+ 
+*/
+
+// 애플 심볼 이미지 사용 방법
+//let systemImage = UIImage(systemName: <#T##String#>)
+
+//#imageLiteral(
+//#colorLitera(
