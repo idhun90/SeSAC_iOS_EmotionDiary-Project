@@ -40,6 +40,8 @@ class feelingViewController: UIViewController {
     
     @IBOutlet var labelCollection: [UILabel]!
     
+    @IBOutlet weak var alertButton: UIButton!
+    
     // 수업용
 //    @IBOutlet weak var nickName: UILabel!
     
@@ -63,7 +65,7 @@ class feelingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-     
+        alertButton.setTitle("조회하기", for: .normal)
         setUpLabelText()
         
         // 수업 강의 내용
@@ -105,6 +107,21 @@ class feelingViewController: UIViewController {
         }
     }
     
+    // 알림창 구현
+    @IBAction func showAlert(_ sender: UIButton) {
+        
+        let alert = UIAlertController(title: "조회", message: "클릭 횟수를 조회했습니다.", preferredStyle: .alert)
+        
+        let ok = UIAlertAction(title: "확인", style: .default, handler: nil)
+        let reset = UIAlertAction(title: "초기화", style: .destructive, handler: nil) // handler에 나중에 추가해보기
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        alert.addAction(ok)
+        alert.addAction(reset)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
+    }
     // 수업용
     // showAlertController()
 
