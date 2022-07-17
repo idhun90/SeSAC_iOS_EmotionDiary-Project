@@ -1,9 +1,6 @@
-//
-//  feelingViewController.swift
-//  SeSACProject
-//
-//  Created by 이도헌 on 2022/07/11.
-//
+enum ClickedCount: String {
+    case Count
+}
 
 import UIKit
 
@@ -55,13 +52,26 @@ class feelingViewController: UIViewController {
         alertButton.setTitle("횟수 초기화", for: .normal)
         initLabelText()
         
+        if UserDefaults.standard.array(forKey: ClickedCount.Count.rawValue) != nil {
+            // 저장한 카운트 배열값 가져와서 emotionCount에 할당
+            emotionCount = UserDefaults.standard.array(forKey: ClickedCount.Count.rawValue) as! [Int] // [Any] -> [Int] 타입 변환
+            
+            // 저장한 카운트 값 레이블에 할당
+            for i in 0...emotionCount.count-1 {
+                labelCollection[i].text = "\(labelNameList[i]) \(emotionCount[i] == 0 ? " " : "\(emotionCount[i])")"
+            }
+            
+        } else {
+            print("nil")
+        }
+                
+        }
         
         // 수업 강의 내용
         // nickName.text = setUserNickname() // 이렇게 사용하기 위해 반환을 사용한다.
         // view.backgroundColor = example().0
         // cryButton.setImage(UIImage(named: example().2), for: .normal)
         
-    }
     
     func initLabelText() {
         for i in 0...labelCollection.count-1 {
@@ -78,6 +88,10 @@ class feelingViewController: UIViewController {
         for i in 0...labelCollection.count-1 {
             labelCollection[i].text = "\(labelNameList[i]) \(emotionCount[i] == 0 ? " " : "\(emotionCount[i])")"
         }
+        
+        // 값 저장
+        UserDefaults.standard.set(emotionCount, forKey: ClickedCount.Count.rawValue)
+        print(emotionCount)
     }
     
     // 알림창 구현
@@ -85,6 +99,22 @@ class feelingViewController: UIViewController {
         
         let alert = UIAlertController(title: "초기화", message: "클릭 횟수를 초기화하시겠습니까?", preferredStyle: .alert)
         let reset = UIAlertAction(title: "초기화", style: .destructive) { _ in
+         
+            self.emotionCount = [0, 0, 0, 0, 0, 0, 0, 0, 0] // 카운트 초기화
+//          UserDefaults.standard.removeObject(forKey: ClickedCount.Count.rawValue) // 해당 구문으로 작성 시 nil 반환
+            UserDefaults.standard.set(self.emotionCount, forKey: ClickedCount.Count.rawValue) // 값 저장
+//
+            if UserDefaults.standard.array(forKey: ClickedCount.Count.rawValue) != nil {
+                self.emotionCount = UserDefaults.standard.array(forKey: ClickedCount.Count.rawValue) as! [Int]
+
+                for i in 0...self.emotionCount.count-1 {
+                    self.labelCollection[i].text = "\(self.labelNameList[i]) \(self.emotionCount[i] == 0 ? " " : "\(self.emotionCount[i])")"
+                }
+
+            } else {
+                print("nil입니다.")
+            }
+
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
